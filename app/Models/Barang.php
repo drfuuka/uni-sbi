@@ -19,5 +19,7 @@ class Barang extends Model
         'nama_barang',
         'status',
         'kondisi',
+        'pemilik',
+        'department',
     ];
 }

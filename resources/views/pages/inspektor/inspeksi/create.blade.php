@@ -93,10 +93,17 @@
 
                                 <select name="inspektor_sbi_area" id="inspektor_sbi_area" class="form-control">
                                     <option value="">-- Pilih --</option>
-                                    <option value="MOHAMAD NASUHI">MOHAMAD NASUHI</option>
-                                    <option value="MUHAMMAD FAHRURROZY ARDIANSYAH">MUHAMMAD FAHRURROZY ARDIANSYAH</option>
-                                    <option value="DWI KURNIANTO">DWI KURNIANTO</option>
-                                    <option value="SARING">SARING</option>
+                                    <option value="Muhammad sigit">Muhammad sigit</option>
+                                    <option value="Andri Suroso">Andri Suroso</option>
+                                    <option value="Syaifur Rahman">Syaifur Rahman</option>
+                                    <option value="Pangki Parnomo">Pangki Parnomo</option>
+                                    <option value="Wasito">Wasito</option>
+                                    <option value="Frediyanto">Frediyanto</option>
+                                    <option value="Anton Nurcahyo">Anton Nurcahyo</option>
+                                    <option value="Budiman H.P">Budiman H.P</option>
+                                    <option value="Bayulianto">Bayulianto</option>
+                                    <option value="Rojikin">Rojikin</option>
+                                    <option value="Sofyantinanto">Sofyantinanto</option>
                                 </select>
 
                                 @error('inspektor_sbi_area')

@@ -47,6 +47,8 @@
                                 <th>Status</th>
                                 <th>Kondisi</th>
                                 <th>Barcode</th>
+                                <th>Pemilik</th>
+                                <th>Department</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -65,11 +67,13 @@
                                                 width="75">
                                         </a>
                                     </td>
+                                    <td>{{ $item->pemilik ? $item->pemilik : '-' }}</td>
+                                    <td>{{ $item->department ? $item->department : '-' }}</td>
                                     <td style="max-width: 100px">
                                         <div class="d-flex gap-3">
                                             <a class="btn btn-outline-primary"
                                                 href="{{ route('admin.barang.edit', $item->id) }}"><i
-                                                    class="bx bx-search-alt"></i> Lihat Detail</a>
+                                                    class="bx bx-search-alt"></i> Detail</a>
                                             <form action="{{ route('admin.barang.destroy', $item->id) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')

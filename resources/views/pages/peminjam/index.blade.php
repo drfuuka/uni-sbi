@@ -71,52 +71,6 @@
 
                         <div id="alert"></div>
 
-                        <div id="onscan" style="display: none">
-
-                            <div class="mb-3">
-                                <label for="nama_peminjam">Nama Peminjam <span class="text-danger">*</span></label>
-
-                                <input id="nama_peminjam" type="text"
-                                    class="form-control @error('nama_peminjam') is-invalid @enderror" name="nama_peminjam"
-                                    autocomplete="off" placeholder="Masukkan nama peminjam" autofocus>
-
-                                @error('nama_peminjam')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="jabatan">Jabatan <span class="text-danger">*</span></label>
-
-                                <input id="jabatan" type="text"
-                                    class="form-control @error('jabatan') is-invalid @enderror" name="jabatan"
-                                    autocomplete="off" placeholder="Tuliskan jabatan" autofocus>
-
-                                @error('jabatan')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="department">Department <span class="text-danger">*</span></label>
-
-                                <input id="department" type="text"
-                                    class="form-control @error('department') is-invalid @enderror" name="department"
-                                    autocomplete="off" placeholder="Tuliskan department" autofocus>
-
-                                @error('department')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                        </div>
-
                         <div class="d-flex mt-3" onclick="$('#form').submit()">
                             <button class="btn btn-primary ms-auto" id="btn-pinjam" style="display: none">
                                 Pinjam
@@ -170,7 +124,6 @@
                         $('#kondisi_barang').val(result.kondisi)
 
                         if (result.status !== 'Tersedia') {
-                            $('#onscan').hide()
                             let message
 
                             if (result.status === 'Dalam Inspeksi') {
@@ -189,7 +142,6 @@
                             $('#alert').html(alert)
 
                         } else {
-                            $('#onscan').slideDown()
                             $('#btn-pinjam').show()
                             $('#btn-pinjam').text('Pinjam Alat')
                         }
@@ -238,7 +190,6 @@
                         $('#kondisi_barang').val(result.kondisi)
 
                         if (result.status !== 'Tersedia') {
-                            $('#onscan').hide()
                             let message
 
                             if (result.status === 'Dalam Inspeksi') {
@@ -257,7 +208,6 @@
                             $('#alert').html(alert)
 
                         } else {
-                            $('#onscan').slideDown()
                             $('#btn-pinjam').show()
                             $('#btn-pinjam').text('Pinjam Alat')
                         }

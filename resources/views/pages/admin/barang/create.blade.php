@@ -34,6 +34,16 @@
                     <form method="POST" action="{{ route('admin.barang.store') }}" class="border-0">
                         @csrf
 
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
                         <div class="mb-2">
                             <label for="nama_barang">Nama Alat</label>
 
@@ -89,6 +99,40 @@
                             </select>
 
                             @error('kondisi')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-2">
+                            <label for="pemilik">Pemilik</label>
+                            <select name="pemilik" id="pemilik" class="form-control" required>
+                                <option value="">-- Pilih --</option>
+                                <option value="SBI">SBI</option>
+                                <option value="Kontraktor">Kontraktor</option>
+                            </select>
+
+                            @error('pemilik')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-2">
+                            <label for="department">Department</label>
+                            <select name="department" id="department" class="form-control" required>
+                                <option value="">-- Pilih --</option>
+                                @php
+                                    for ($i = 1; $i <= 12; $i++) {
+                                        echo '<option value="Department ' . $i . '">Department ' . $i . '</option>';
+                                    }
+                                @endphp
+                            </select>
+
+
+                            @error('department')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

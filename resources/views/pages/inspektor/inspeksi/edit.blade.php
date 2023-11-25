@@ -41,6 +41,17 @@
                         @csrf
                         @method('PUT')
 
+
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
                         <input type="hidden" class="form-control mb-3" name="barang_id" id="barang_id"
                             value="{{ $inspeksi->barang_id }}">
 
@@ -84,17 +95,38 @@
 
                                 <select name="inspektor_sbi_area" id="inspektor_sbi_area" class="form-control">
                                     <option value="">-- Pilih --</option>
-                                    <option value="MOHAMAD NASUHI"
-                                        {{ $inspeksi->inspektor_sbi_area === 'MOHAMAD NASUHI' ? 'selected' : '' }}>MOHAMAD
-                                        NASUHI</option>
-                                    <option value="MUHAMMAD FAHRURROZY ARDIANSYAH"
-                                        {{ $inspeksi->inspektor_sbi_area === 'MUHAMMAD FAHRURROZY ARDIANSYAH' ? 'selected' : '' }}>
-                                        MUHAMMAD FAHRURROZY ARDIANSYAH</option>
-                                    <option value="DWI KURNIANTO"
-                                        {{ $inspeksi->inspektor_sbi_area === 'DWI KURNIANTO' ? 'selected' : '' }}>DWI
-                                        KURNIANTO</option>
-                                    <option value="SARING"
-                                        {{ $inspeksi->inspektor_sbi_area === 'SARING' ? 'selected' : '' }}>SARING</option>
+                                    <option value="Muhammad sigit"
+                                        {{ $inspeksi->inspektor_sbi_area === 'Muhammad sigit' ? 'selected' : '' }}>Muhammad
+                                        sigit</option>
+                                    <option value="Andri Suroso"
+                                        {{ $inspeksi->inspektor_sbi_area === 'Andri Suroso' ? 'selected' : '' }}>Andri
+                                        Suroso</option>
+                                    <option value="Syaifur Rahman"
+                                        {{ $inspeksi->inspektor_sbi_area === 'Syaifur Rahman' ? 'selected' : '' }}>Syaifur
+                                        Rahman</option>
+                                    <option value="Pangki Parnomo"
+                                        {{ $inspeksi->inspektor_sbi_area === 'Pangki Parnomo' ? 'selected' : '' }}>Pangki
+                                        Parnomo</option>
+                                    <option value="Wasito"
+                                        {{ $inspeksi->inspektor_sbi_area === 'Wasito' ? 'selected' : '' }}>Wasito</option>
+                                    <option value="Frediyanto"
+                                        {{ $inspeksi->inspektor_sbi_area === 'Frediyanto' ? 'selected' : '' }}>Frediyanto
+                                    </option>
+                                    <option value="Anton Nurcahyo"
+                                        {{ $inspeksi->inspektor_sbi_area === 'Anton Nurcahyo' ? 'selected' : '' }}>Anton
+                                        Nurcahyo</option>
+                                    <option value="Budiman H.P"
+                                        {{ $inspeksi->inspektor_sbi_area === 'Budiman H.P' ? 'selected' : '' }}>Budiman H.P
+                                    </option>
+                                    <option value="Bayulianto"
+                                        {{ $inspeksi->inspektor_sbi_area === 'Bayulianto' ? 'selected' : '' }}>Bayulianto
+                                    </option>
+                                    <option value="Rojikin"
+                                        {{ $inspeksi->inspektor_sbi_area === 'Rojikin' ? 'selected' : '' }}>Rojikin
+                                    </option>
+                                    <option value="Sofyantinanto"
+                                        {{ $inspeksi->inspektor_sbi_area === 'Sofyantinanto' ? 'selected' : '' }}>
+                                        Sofyantinanto</option>
                                 </select>
 
                                 @error('inspektor_sbi_area')

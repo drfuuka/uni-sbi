@@ -35,6 +35,17 @@
                         @csrf
                         @method('PUT')
 
+
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
                         <div class="mb-2">
                             <label for="nama_barang">Nama Alat</label>
 
@@ -98,6 +109,44 @@
                             </select>
 
                             @error('kondisi')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+
+                        <div class="mb-2">
+                            <label for="pemilik">Pemilik</label>
+                            <select name="pemilik" id="pemilik" class="form-control" required>
+                                <option value="">-- Pilih --</option>
+                                <option value="SBI" {{ $barang->pemilik === 'SBI' ? 'selected' : '' }}>SBI</option>
+                                <option value="Kontraktor" {{ $barang->pemilik === 'Kontraktor' ? 'selected' : '' }}>
+                                    Kontraktor</option>
+                            </select>
+
+                            @error('pemilik')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-2">
+                            <label for="department">Department</label>
+                            <select name="department" id="department" class="form-control" required>
+                                <option value="">-- Pilih --</option>
+                                @php
+                                    for ($i = 1; $i <= 12; $i++) {
+                                        $value = 'Department ' . $i;
+                                        $selected = $barang->department === $value ? 'selected' : '';
+                                        echo '<option value="' . $value . '" ' . $selected . '>' . $value . '</option>';
+                                    }
+                                @endphp
+                            </select>
+
+
+                            @error('department')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

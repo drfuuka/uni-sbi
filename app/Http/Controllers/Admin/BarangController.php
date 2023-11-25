@@ -25,13 +25,16 @@ class BarangController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_barang' => ['required', 'string'],
-            'status'      => ['required'],
-            'kondisi'     => ['required'],
+            'nama_barang'  => ['required', 'string'],
+            'jenis_barang' => ['required'],
+            'status'       => ['required'],
+            'pemilik'      => ['required'],
+            'department'   => ['required'],
+            'kondisi'      => ['required'],
         ]);
 
         $barcode = new DNS2D();
-        $kodeBarang = generate_number('barang', 'kode_barang', 3, 'BRG');
+        $kodeBarang = generate_number('barang', 'kode_barang', 3, 'ALT');
 
         // Generate the barcode image and save it to a file
         $barcodeImage = $barcode->getBarcodePNG($kodeBarang, "QRCODE");
@@ -45,7 +48,9 @@ class BarangController extends Controller
             'nama_barang'  => $request->nama_barang,
             'jenis_barang' => $request->jenis_barang,
             'status'       => $request->status,
-            'barcode'      => $barcodeImagePath,        // Store only the image path
+            'pemilik'      => $request->pemilik,
+            'department'   => $request->department,
+            'barcode'      => $barcodeImagePath,
             'kondisi'      => $request->kondisi,
         ]);
 
@@ -65,8 +70,11 @@ class BarangController extends Controller
     {
         $request->validate([
             'nama_barang' => ['required', 'string'],
-            'status'      => ['required'],
-            'kondisi'     => ['required'],
+            'jenis_barang' => ['required'],
+            'status'       => ['required'],
+            'pemilik'      => ['required'],
+            'department'   => ['required'],
+            'kondisi'      => ['required'],
         ]);
 
         $barang = Barang::findOrFail($id);
@@ -75,6 +83,8 @@ class BarangController extends Controller
             'nama_barang'  => $request->nama_barang,
             'status'       => $request->status,
             'jenis_barang' => $request->jenis_barang,
+            'pemilik'      => $request->pemilik,
+            'department'   => $request->department,
             'kondisi'      => $request->kondisi,
         ]);
 

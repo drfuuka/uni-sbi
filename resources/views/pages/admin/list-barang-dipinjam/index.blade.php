@@ -37,10 +37,10 @@
                     <table id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
                         <thead>
                             <tr>
-                                <th>Nama Barang</th>
-                                <th>Peminjam</th>
-                                <th>Jabatan</th>
-                                <th>Department</th>
+                                <th>Kode Alat</th>
+                                <th>Nama Alat</th>
+                                <th>Tanggal Peminjaman</th>
+                                <th>Tanggal Pengembalian</th>
                                 <th>Proses Peminjaman</th>
                             </tr>
                         </thead>
@@ -48,10 +48,16 @@
                         <tbody>
                             @foreach ($peminjam as $item)
                                 <tr>
+                                    <td>{{ $item->barang->kode_barang }}</td>
                                     <td>{{ $item->barang->nama_barang }}</td>
-                                    <td>{{ $item->nama_peminjam }}</td>
-                                    <td>{{ $item->jabatan }}</td>
-                                    <td>{{ $item->department }}</td>
+                                    <td>{{ $item->created_at }}</td>
+                                    <td>
+                                        @if ($item->status === 'Berjalan')
+                                            -
+                                        @else
+                                            {{ $item->updated_at }}
+                                        @endif
+                                    </td>
                                     <td>
                                         @if ($item->status === 'Berjalan')
                                             <span class="badge bg-warning bg-soft px-2 py-2 text-warning">Berjalan</span>
