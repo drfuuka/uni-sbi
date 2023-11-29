@@ -71,11 +71,11 @@
 
                         <div id="alert"></div>
 
-                        <div class="d-flex mt-3" onclick="$('#form').submit()">
+                        {{-- <div class="d-flex mt-3" onclick="$('#form').submit()">
                             <button class="btn btn-primary ms-auto" id="btn-pinjam" style="display: none">
                                 Pinjam
                             </button>
-                        </div>
+                        </div> --}}
 
                     </form>
 
@@ -89,6 +89,12 @@
     <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 
     <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
         function testScan() {
             $.ajax({
                 url: `scan-barang/BRGA004`,
@@ -98,6 +104,7 @@
                     if ($('#detail-barang').length) {
                         $('#detail-barang').remove()
                     }
+
 
                     if (result.nama_barang) {
                         var cardHtml = `<div class="card border shadow-sm rounded-md p-3" id="detail-barang">
@@ -125,30 +132,59 @@
 
                         if (result.status !== 'Tersedia') {
                             let message
+                            let alert
 
                             if (result.status === 'Dalam Inspeksi') {
                                 message = 'Alat sedang dalam inspeksi'
+                                alert = `<div class="alert alert-danger">
+                                    ` + message + `
+                                </div>`
+
+                                $('#alert').html(alert)
                             }
                             if (result.status === 'Dipinjam') {
-                                $('#btn-pinjam').show()
-                                $('#btn-pinjam').text('Kembalikan Alat')
-                                message = 'Alat sedang dalam peminjaman'
+                                $.ajax({
+                                    url: `pinjam`,
+                                    type: 'POST',
+                                    data: {
+                                        barang_id: $('#barang_id').val()
+                                    },
+                                    success: function(result) {
+                                        console.log('asd');
+                                        message = 'Alat berhasil dikembalikan'
+                                        alert = `<div class="alert alert-success">
+                                            ` + message + `
+                                        </div>`
+
+                                        $('#alert').html(alert)
+
+                                    }
+                                })
                             }
-
-                            var alert = `<div class="alert alert-danger">
-                                ` + message + `
-                            </div>`
-
-                            $('#alert').html(alert)
-
                         } else {
-                            $('#btn-pinjam').show()
-                            $('#btn-pinjam').text('Pinjam Alat')
+                            $.ajax({
+                                url: `pinjam`,
+                                type: 'POST',
+                                data: {
+                                    barang_id: $('#barang_id').val()
+                                },
+                                success: function(result) {
+                                    message = 'Alat berhasil dipinjam'
+                                    alert = `<div class="alert alert-success">
+                                    ` + message + `
+                                </div>`
+
+                                    $('#alert').html(alert)
+                                }
+                            })
+                            // $('#btn-pinjam').show()
+                            // $('#btn-pinjam').text('Pinjam Alat')
                         }
                     }
 
-                    $('#btn-scan').show()
-                    $('#btn-kembalikan').show()
+                    // $('#btn-scan').show()
+                    // $('#btn-kembalikan').show()
+
                     $('#btn-scan-cancel').hide()
                 }
             })
@@ -165,20 +201,21 @@
                         $('#detail-barang').remove()
                     }
 
+
                     if (result.nama_barang) {
                         var cardHtml = `<div class="card border shadow-sm rounded-md p-3" id="detail-barang">
-                                <h4 class="mb-3">Alat Terdeteksi</h4>
-                                <label>Kode Alat</label>
-                                <input type="text" class="form-control mb-3" disabled id="kode_barang">
-                                <label>Nama Alat</label>
-                                <input type="text" class="form-control mb-3" disabled id="nama_barang">
-                                <label>Jenis Alat</label>
-                                <input type="text" class="form-control mb-3" disabled id="jenis_barang">
-                                <label>Status</label>
-                                <input type="text" class="form-control mb-3" disabled id="status_barang">
-                                <label>Kondisi</label>
-                                <input type="text" class="form-control mb-3" disabled id="kondisi_barang">
-                            </div>`
+                            <h4 class="mb-3">Alat Terdeteksi</h4>
+                            <label>Kode Alat</label>
+                            <input type="text" class="form-control mb-3" disabled id="kode_barang">
+                            <label>Nama Alat</label>
+                            <input type="text" class="form-control mb-3" disabled id="nama_barang">
+                            <label>Jenis Alat</label>
+                            <input type="text" class="form-control mb-3" disabled id="jenis_barang">
+                            <label>Status</label>
+                            <input type="text" class="form-control mb-3" disabled id="status_barang">
+                            <label>Kondisi</label>
+                            <input type="text" class="form-control mb-3" disabled id="kondisi_barang">
+                        </div>`
 
                         $('#reader').after(cardHtml)
 
@@ -191,36 +228,60 @@
 
                         if (result.status !== 'Tersedia') {
                             let message
+                            let alert
 
                             if (result.status === 'Dalam Inspeksi') {
                                 message = 'Alat sedang dalam inspeksi'
+                                alert = `<div class="alert alert-danger">
+                                    ` + message + `
+                                </div>`
+
+                                $('#alert').html(alert)
                             }
                             if (result.status === 'Dipinjam') {
-                                $('#btn-pinjam').show()
-                                $('#btn-pinjam').text('Kembalikan Alat')
-                                message = 'Alat sedang dalam peminjaman'
+                                $.ajax({
+                                    url: `pinjam`,
+                                    type: 'POST',
+                                    data: {
+                                        barang_id: $('#barang_id').val()
+                                    },
+                                    success: function(result) {
+                                        console.log('asd');
+                                        message = 'Alat berhasil dikembalikan'
+                                        alert = `<div class="alert alert-success">
+                                            ` + message + `
+                                        </div>`
+
+                                        $('#alert').html(alert)
+
+                                    }
+                                })
                             }
-
-                            var alert = `<div class="alert alert-danger">
-                                ` + message + `
-                            </div>`
-
-                            $('#alert').html(alert)
-
                         } else {
-                            $('#btn-pinjam').show()
-                            $('#btn-pinjam').text('Pinjam Alat')
+                            $.ajax({
+                                url: `pinjam`,
+                                type: 'POST',
+                                data: {
+                                    barang_id: $('#barang_id').val()
+                                },
+                                success: function(result) {
+                                    message = 'Alat berhasil dipinjam'
+                                    alert = `<div class="alert alert-success">
+                                        ` + message + `
+                                    </div>`
+
+                                    $('#alert').html(alert)
+                                }
+                            })
+                            // $('#btn-pinjam').show()
+                            // $('#btn-pinjam').text('Pinjam Alat')
                         }
-
-
-                        html5QrcodeScanner.clear()
-                        $('#btn-scan').show()
-                        $('#btn-scan-cancel').hide()
                     }
 
-                    $('#btn-scan').show()
-                    $('#btn-scan-cancel').hide()
+                    // $('#btn-scan').show()
+                    // $('#btn-kembalikan').show()
 
+                    $('#btn-scan-cancel').hide()
                 }
             });
 
